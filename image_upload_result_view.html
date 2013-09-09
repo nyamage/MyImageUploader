@@ -1,0 +1,14 @@
+<html>
+<head>
+<script type="text/javascript">
+window.onload = function(){
+	if(window.parent) {
+		var response = <?php echo json_encode($view_parameters); ?>;
+		window.parent.upload_response(response);
+	}
+}
+</script>
+</head>	
+<body>
+</body>
+</html>

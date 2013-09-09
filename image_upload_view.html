@@ -1,0 +1,42 @@
+<html>
+
+<head>
+	<script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+</head>
+
+<body>
+	<div id="gallary"></div>
+
+	<form target="receive_upload_result" action="image_uploader.php" method="post" enctype="multipart/form-data">
+		<input type="file" name="picture" /> <br/>
+		<input type="submit" value="submit" /> <br/>
+	</form>
+
+	<div id="result"></div>
+
+	<iframe id="receive_upload_result" name="receive_upload_result" style="width:0px; height:0px; display:none;"></iframe>
+	<script>
+	$(document).ready(function(){
+		var images = <?php echo json_encode($view_parameters); ?>;
+		for(var key in images)
+		{
+			add_image(images[key]);
+		}
+	});
+
+	function add_image(src) {
+		var image = $("<image />");
+		image.attr("src", src);
+		var div = $("<div />");
+		div.append(image);
+		$("#gallary").append(div);
+	}
+
+	function upload_response(res){
+		$("#result").text(res["result"]);
+		add_image(res["image"]);
+	}
+	</script>
+</body>
+
+</html>
